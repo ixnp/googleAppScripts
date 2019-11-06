@@ -34,3 +34,27 @@ function fun1(){
      
    }
    
+//// Creating a doc from sheet
+function fun2(){
+    var ss = SpreadsheetApp.openById('19qdWW5VN278G0s3ST5VyLDYDLHwHMfcGtP5dIH5o8do')
+    var sheet = ss.getSheets()[0];
+    //creates a document named sample sheet data
+    var doc = DocumentApp.create('Sample Sheet Data');
+    // gets the body of the above document
+    var body = doc.getBody()
+    var rowData = sheet.getRange(1,1,2,4).getValues();
+    Logger.log(rowData);
+     //insertParagraph(childIndex, text)
+     //Creates and inserts a new Paragraph at the specified index, containing the specified text contents.
+    //creates a paragraph puts it at the top gives it text that is the name of the spread sheet above
+    body.insertParagraph(0, ss.getName())
+    //sets the above as a heading with large font
+    .setHeading(DocumentApp.ParagraphHeading.HEADING1)
+    var table = body.appendTable(rowData);
+    table.getRow(0).editAsText().setBold(true);
+   }
+   
+   
+   
+   
+   
